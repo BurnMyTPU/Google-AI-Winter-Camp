@@ -14,7 +14,7 @@ sys.path.insert(0, '.')
 import brambox.boxes as bbb
 
 DEBUG = True  # Enable some debug prints with extra information
-ROOT = '/data2/yichaoxiong/data/VOCdevkit'  # Root folder where the VOCdevkit is located
+ROOT = '/home/chaopengzhangpku/workspace/dataset/fashion_Devkit/'  # Root folder where the VOCdevkit is located
 
 TRAINSET = [
     ('2019', 'train'),
@@ -28,7 +28,7 @@ TESTSET = [
 def identify(xml_file):
     root_dir = ROOT
     root = ET.parse(xml_file).getroot()
-    folder = root.find('folder').text
+    folder = root.find('folder').text + '2019'
     filename = root.find('filename').text
     return f'{root_dir}/{folder}/JPEGImages/{filename}'
 

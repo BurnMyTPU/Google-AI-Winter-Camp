@@ -5,7 +5,7 @@ log_name: "logs"
 
 labels: ["fashion"]
 
-data_root_dir: "/data2/yichaoxiong/data/VOCdevkit/onedet_cache"
+data_root_dir: "/home/chaopengzhangpku/workspace/dataset/fashion_Devkit/onedet_cache"
 
 train:
     dataset: "train"
