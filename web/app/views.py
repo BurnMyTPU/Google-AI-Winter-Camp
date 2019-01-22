@@ -49,7 +49,7 @@ def query_imgs(request):
         global data, predicted_class
         # data, predicted_class = flower.model_predict(imagePath, model_str, model_weights, nb_classes, width)
         data = ['img1', 'img2', 'img3', 'img4']
-        res = json.loads(data)
+        res = json.dumps(data)
         return HttpResponse(res)
 
     else:
