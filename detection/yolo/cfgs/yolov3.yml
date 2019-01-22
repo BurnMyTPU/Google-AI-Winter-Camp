@@ -9,8 +9,8 @@ data_root_dir: "/home/chaopengzhangpku/workspace/dataset/fashion_Devkit/onedet_c
 
 train:
     dataset: "train"
-    stdout: False
-    gpus: "6"
+    stdout: True
+    gpus: "0"
     nworkers: 16
     pin_mem: True
 
@@ -37,7 +37,7 @@ train:
 test:
     dataset: "test"
     stdout: True
-    gpus: "3"
+    gpus: "0"
     nworkers: 8
     pin_mem: True
 
