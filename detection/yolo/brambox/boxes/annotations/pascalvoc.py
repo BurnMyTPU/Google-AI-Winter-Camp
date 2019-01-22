@@ -36,7 +36,7 @@ class PascalVocAnnotation(Annotation):
     def deserialize(self, xml_obj):
         """ parse a Pascal Voc xml annotation string """
         self.class_label = xml_obj.find('name').text
-        self.occluded = xml_obj.find('truncated').text == '1'
+        self.occluded = False #xml_obj.find('truncated').text == '1'
         self.difficult = xml_obj.find('difficult').text == '1'
 
         box = xml_obj.find('bndbox')
