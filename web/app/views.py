@@ -35,7 +35,7 @@ def query_imgs(request):
     if request.method == 'POST':
         filename = request.FILES['image'].name
         # imagePath = '/home/ubuntu/flower/media/uploads/' + str(int(time.time() * 1000)) + "-" + filename
-        imagePath = '/home/ubuntu/flower/media/uploads/' + filename
+        imagePath = '/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/upload' + filename
         print('imagePath is ', imagePath)
         destination = open(imagePath, 'wb+')
         for chunk in request.FILES['image'].chunks():
