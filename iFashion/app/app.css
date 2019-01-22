@@ -1,0 +1,77 @@
+body {
+  padding: 20px;
+}
+
+
+/* View: Phone list */
+.fashion {
+  list-style: none;
+  padding-top: 10px;
+}
+
+
+/*.fashion li {
+  clear: both;
+  height: 215px;
+  padding-top: 15px;
+}
+
+.thumb {
+  float: left;
+  height: 200px;
+  margin: -0.5em 1em 1.5em 1em;
+  padding-bottom: 1em;
+  width: 200px;
+}*/
+
+/* View: Phone detail */
+.phone {
+  background-color: white;
+  border: 1px solid black;
+  float: left;
+  height: 400px;
+  margin-bottom: 2em;
+  margin-right: 3em;
+  padding: 2em;
+  width: 400px;
+}
+
+.phone-thumbs {
+  list-style: none;
+  margin: 0;
+}
+
+.phone-thumbs img {
+  height: 100px;
+  padding: 1em;
+  width: 100px;
+}
+
+.phone-thumbs li {
+  background-color: white;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 1em;
+}
+
+.specs {
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.specs dt {
+  font-weight: bold;
+}
+
+.specs > li {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+}
+
+.specs > li > span {
+  font-size: 1.2em;
+  font-weight: bold;
+}

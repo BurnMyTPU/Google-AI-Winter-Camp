@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <div class="row">
+  <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-xs-12">
+                  <div id="mySidenav" class="sidenav">
+                    <a class="closebtn" ng-click="closeNav()">&times;</a>
+                    <a href="#!/fashions">Home</a>
+                    <a href="#!/upload/">Upload</a>
+                    <a href="https://github.com/BurnMyTPU/">Code</a>
+                    <a href="#">About</a>
+                  </div>
+                  <span style="font-size:30px;cursor:pointer" ng-click="openNav()">&#9776;</span>
+                  <div class="absoluteCenter">
+                    <h1 align="center">I ❤️ Fashion</h1>
+                    <h3 align="center">Pick up your favourite one! Upload your cloths image!</h3>
+                  </div>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<body>
+  <div class="row">
+    <div class="container">
+      <div class="col-xs-12">
+          <form ng-submit="submit()" name="form" role="form" layout-align="center center">
+        <p align="center">
+           <input ng-model="form.image" type="file" class="form-control" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)" style="width:200px"  >
+          <img ng-src="{{image_source}}" style="width:400px;" >
+        </p>
+
+        <p align="center">
+        <input type="submit" id="submit" value="Upload" />
+        </p>
+        <p align="center">
+        </p>
+        <br/>
+      
+      </form>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</body>
+
+</div>
+
+
+
+
+
+
