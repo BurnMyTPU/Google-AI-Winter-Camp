@@ -54,7 +54,7 @@ def main():
             dist = str_distance(str1, str2)
             matrix[i][j] = dist
         if i % 10 == 0:
-            print(i, train_id)
+            print(i, val_id)
 
     key_query = {}
     tensor = torch.Tensor(matrix)
@@ -63,9 +63,9 @@ def main():
     for i, val_id in enumerate(val_ids):
         key_query[val_id] = [train_ids[j] for j in topks[i]]
 
-    np.save('val_ids.pkl', val_ids)
-    np.save('train_ids.pkl', train_ids)
-    np.save('key_query.pkl', key_query)
+    np.save('val_ids.npy', val_ids)
+    np.save('train_ids.npy', train_ids)
+    np.save('key_query.npy', key_query)
 
 
 main()
