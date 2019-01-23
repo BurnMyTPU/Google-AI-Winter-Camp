@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="row">
+  <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+              <div class="col-xs-1">
+                
+              </div>
+                <div class="col-xs-12">
+                  <div id="mySidenav" class="sidenav">
+                    <a class="closebtn" ng-click="closeNav()">&times;</a>
+                    <a href="#!/fashions">Home</a>
+                    <a href="#!/upload/">Upload</a>
+                    <a href="https://github.com/BurnMyTPU/">Code</a>
+                    <a href="#">About</a>
+                  </div>
+                  <span style="font-size:30px;cursor:pointer" ng-click="openNav()">&#9776;</span>
+                  <div class="absoluteCenter">
+                    <h1 align="center" ng-init="h_1='I ❤️ Fashion'">{{h_1}}</h1>
+                    <h3 align="center">Pick up your favourite one! Upload your cloths image!</h3>
+                  </div>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div class="container">
+<div class="row">
+  
+    <div class="col-md-2">
+        <!-- Sidebar -->
+      <!-- <div class="sidenav">
+        <a href="#choose">Choose Image</a>
+        <a href="#sourcecode">Source Code</a>
+        <a href="#about">About Team</a>
+      </div> -->
+
+    </div>
+    
+    <div>
+      <!--Body content-->
+
+      <ul class="fashion">
+        <li ng-repeat="fashion in $ctrl.fashions" class="thumbnail">
+          <a href="" ng-click="chooseimg()">
+            <img ng-src="{{fashion.imageUrl}}" alt="{{fashion.name}}"/>
+            <p align="center">{{fashion.name}}</p> 
+          </a>
+          <!-- <a href="#!/Fashions/{{fashion.id}}" class="thumb" align="center"> -->
+            
+        </li>
+      </ul>
+      
+    </div>
+
+  </div>
+    
+  </div>
+</div>
+
+
+
+
+
+

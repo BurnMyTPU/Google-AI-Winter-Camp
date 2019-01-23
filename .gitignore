@@ -5,3 +5,6 @@
 *.json
 *.npy
 events.*
+/web/upload/
+/detection/yolo/weights/
+/web/static/validation.tar

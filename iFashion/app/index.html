@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" ng-app="fashionApp">
+  <head>
+    <meta charset="utf-8">
+    <title>IFashion</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="fashion-list/fashion-list.module.js"></script>
+    <script src="fashion-list/fashion-list.component.js"></script>
+    <script src="fashion-detail/fashion-detail.module.js"></script>
+    <script src="fashion-detail/fashion-detail.component.js"></script>
+    <script src="fashion-upload/fashion-upload.module.js"></script>
+    <script src="fashion-upload/fashion-upload.component.js"></script>
+  </head>
+  <body>
+
+    <div ng-view></div>
+
+  </body>
+</html>
