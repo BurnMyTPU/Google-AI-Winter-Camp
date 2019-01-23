@@ -12,7 +12,7 @@ from app.models import *
 import json
 import numpy as np
 import torch
-from FashionSearch import FashionSearch
+from app.FashionSearch import FashionSearch
 
 fashionSearch = FashionSearch()
 
