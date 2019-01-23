@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import *
+from app.views import FashionWeb
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('post/', query_imgs),
+    path('post/', FashionWeb.query_imgs),
 ]
