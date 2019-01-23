@@ -30,6 +30,7 @@ class GetBoundingBoxes(BaseTransform):
     Note:
         The output tensor uses relative values for its coordinates.
     """
+
     def __init__(self, num_classes, anchors, conf_thresh):
         super().__init__(num_classes=num_classes, anchors=anchors, conf_thresh=conf_thresh)
 
@@ -52,8 +53,8 @@ class GetBoundingBoxes(BaseTransform):
         w = network_output.size(3)
 
         # Compute xc,yc, w,h, box_score on Tensor
-        lin_x = torch.linspace(0, w-1, w).repeat(h, 1).view(h*w)
-        lin_y = torch.linspace(0, h-1, h).repeat(w, 1).t().contiguous().view(h*w)
+        lin_x = torch.linspace(0, w - 1, w).repeat(h, 1).view(h * w)
+        lin_y = torch.linspace(0, h - 1, h).repeat(w, 1).t().contiguous().view(h * w)
         anchor_w = anchors[:, 0].contiguous().view(1, num_anchors, 1)
         anchor_h = anchors[:, 1].contiguous().view(1, num_anchors, 1)
         if cuda:
@@ -62,23 +63,25 @@ class GetBoundingBoxes(BaseTransform):
             anchor_w = anchor_w.cuda()
             anchor_h = anchor_h.cuda()
 
-        network_output = network_output.view(batch, num_anchors, -1, h*w)   # -1 == 5+num_classes (we can drop feature maps if 1 class)
-        network_output[:, :, 0, :].sigmoid_().add_(lin_x).div_(w)           # X center
-        network_output[:, :, 1, :].sigmoid_().add_(lin_y).div_(h)           # Y center
-        network_output[:, :, 2, :].exp_().mul_(anchor_w).div_(w)            # Width
-        network_output[:, :, 3, :].exp_().mul_(anchor_h).div_(h)            # Height
-        network_output[:, :, 4, :].sigmoid_()                               # Box score
+        network_output = network_output.view(batch, num_anchors, -1,
+                                             h * w)  # -1 == 5+num_classes (we can drop feature maps if 1 class)
+        network_output[:, :, 0, :].sigmoid_().add_(lin_x).div_(w)  # X center
+        network_output[:, :, 1, :].sigmoid_().add_(lin_y).div_(h)  # Y center
+        network_output[:, :, 2, :].exp_().mul_(anchor_w).div_(w)  # Width
+        network_output[:, :, 3, :].exp_().mul_(anchor_h).div_(h)  # Height
+        network_output[:, :, 4, :].sigmoid_()  # Box score
 
-        conf_scores = network_output[:, :, 4, :] ## mileistone
+        conf_scores = network_output[:, :, 4, :]  ## mileistone
 
+        print('num_class', num_classes)
         # Compute class_score
         if num_classes > 1:
             if torch.__version__.startswith('0.3'):
                 cls_scores = torch.nn.functional.softmax(Variable(network_output[:, :, 5:, :], volatile=True), 2).data
             else:
                 with torch.no_grad():
-                    cls_scores = torch.nn.functional.softmax(network_output[:, :, 5:, :], 2) 
-                    cls_scores = (cls_scores * conf_scores.unsqueeze(2).expand_as(cls_scores)).transpose(2,3)
+                    cls_scores = torch.nn.functional.softmax(network_output[:, :, 5:, :], 2)
+                    cls_scores = (cls_scores * conf_scores.unsqueeze(2).expand_as(cls_scores)).transpose(2, 3)
                     cls_scores = cls_scores.contiguous().view(cls_scores.size(0), cls_scores.size(1), -1)
         else:
             cls_max = network_output[:, :, 4, :]
@@ -95,17 +98,19 @@ class GetBoundingBoxes(BaseTransform):
 
         # Mask select boxes > conf_thresh
         coords = network_output.transpose(2, 3)[..., 0:4]
-        coords = coords.unsqueeze(3).expand(coords.size(0),coords.size(1),coords.size(2), 
-                num_classes,coords.size(3)).contiguous().view(coords.size(0),coords.size(1),-1,coords.size(3))
+        coords = coords.unsqueeze(3).expand(coords.size(0), coords.size(1), coords.size(2),
+                                            num_classes, coords.size(3)).contiguous().view(coords.size(0),
+                                                                                           coords.size(1), -1,
+                                                                                           coords.size(3))
         coords = coords[score_thresh[..., None].expand_as(coords)].view(-1, 4)
         scores = cls_scores[score_thresh].view(-1, 1)
-        idx = (torch.arange(num_classes)).repeat(batch, num_anchors, w*h).cuda()
+        idx = (torch.arange(num_classes)).repeat(batch, num_anchors, w * h).cuda()
         idx = idx[score_thresh].view(-1, 1)
         detections = torch.cat([coords, scores, idx], dim=1)
 
         # Get indexes of splits between images of batch
         max_det_per_batch = num_anchors * h * w * num_classes
-        slices = [slice(max_det_per_batch * i, max_det_per_batch * (i+1)) for i in range(batch)]
+        slices = [slice(max_det_per_batch * i, max_det_per_batch * (i + 1)) for i in range(batch)]
         det_per_batch = torch.IntTensor([score_thresh_flat[s].int().sum() for s in slices])
         split_idx = torch.cumsum(det_per_batch, dim=0)
 
@@ -134,6 +139,7 @@ class NonMaxSupression(BaseTransform):
         This post-processing function expects the input to be bounding boxes,
         like the ones created by :class:`lightnet.data.GetBoundingBoxes` and outputs exactly the same format.
     """
+
     def __init__(self, nms_thresh, class_nms=True, fast=False):
         super().__init__(nms_thresh=nms_thresh, class_nms=class_nms, fast=fast)
 
@@ -157,7 +163,7 @@ class NonMaxSupression(BaseTransform):
 
         a = boxes[:, :2]
         b = boxes[:, 2:4]
-        bboxes = torch.cat([a-b/2, a+b/2], 1)
+        bboxes = torch.cat([a - b / 2, a + b / 2], 1)
         scores = boxes[:, 4]
         classes = boxes[:, 5]
 
@@ -183,7 +189,7 @@ class NonMaxSupression(BaseTransform):
             conflicting = (conflicting & same_class)
 
         keep = conflicting.sum(0).byte()
-        if not fast:        # How can we optimize this part!?
+        if not fast:  # How can we optimize this part!?
             keep = keep.cpu()
             conflicting = conflicting.cpu()
 
@@ -216,6 +222,7 @@ class TensorToBrambox(BaseTransform):
         Just like everything in PyTorch, this transform only works on batches of images.
         This means you need to wrap your tensor of detections in a list if you want to run this transform on a single image.
     """
+
     def __init__(self, network_size, class_label_map=None):
         super().__init__(network_size=network_size, class_label_map=class_label_map)
         if self.class_label_map is None:
@@ -285,6 +292,7 @@ class ReverseLetterbox(BaseTransform):
         Just like everything in PyTorch, this transform only works on batches of images.
         This means you need to wrap your tensor of detections in a list if you want to run this transform on a single image.
     """
+
     def __init__(self, network_size, image_size):
         super().__init__(network_size=network_size, image_size=image_size)
 
@@ -296,10 +304,10 @@ class ReverseLetterbox(BaseTransform):
         if im_w == net_w and im_h == net_h:
             scale = 1
         elif im_w / net_w >= im_h / net_h:
-            scale = im_w/net_w
+            scale = im_w / net_w
         else:
-            scale = im_h/net_h
-        pad = int((net_w - im_w/scale) / 2), int((net_h - im_h/scale) / 2)
+            scale = im_h / net_h
+        pad = int((net_w - im_w / scale) / 2), int((net_h - im_h / scale) / 2)
 
         converted_boxes = []
         for b in boxes:
