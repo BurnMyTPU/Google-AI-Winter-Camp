@@ -86,6 +86,8 @@ class GetBoundingBoxes(BaseTransform):
         else:
             cls_max = network_output[:, :, 4, :]
             cls_max_idx = torch.zeros_like(cls_max)
+            print('cls max', cls_max)
+            print('index', cls_max_idx)
 
         score_thresh = cls_scores > conf_thresh
         score_thresh_flat = score_thresh.view(-1)
