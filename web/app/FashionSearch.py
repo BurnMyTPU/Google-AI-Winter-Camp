@@ -46,6 +46,7 @@ class FashionSearch:
         net.output = nn.Sequential()
         state_dict = torch.load(weight_path)
         net.load_state_dict(state_dict, strict=False)
+        net.cuda()
         net.eval()
         return net
 
