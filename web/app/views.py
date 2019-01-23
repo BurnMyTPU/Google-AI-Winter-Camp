@@ -54,7 +54,6 @@ def query_imgs(request):
 
     else:
         return HttpResponse("No Post!")
-    pass
 
 
 def get_recommended():
