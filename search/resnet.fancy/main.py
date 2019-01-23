@@ -106,5 +106,5 @@ def draw_curve():
 
 
 if __name__ == '__main__': 
-    #gen_result()
+    gen_result()
     draw_curve()
