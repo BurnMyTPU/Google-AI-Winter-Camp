@@ -12,6 +12,7 @@ from utils.test import voc_wrapper
 __all__ = ['VOCTest']
 
 
+
 class CustomDataset(vn_data.BramboxDataset):
     def __init__(self, hyper_params):
         anno = hyper_params.testfile
