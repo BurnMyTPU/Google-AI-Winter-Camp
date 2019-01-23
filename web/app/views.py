@@ -56,7 +56,7 @@ class FashionWeb:
             destination.close()
             with open('/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/app/fashion.json') as data_file:
                 data = json.load(data_file)
-
+            print(type(data))
             # res = json.dumps(data)
             return JsonResponse(data)
         else:
