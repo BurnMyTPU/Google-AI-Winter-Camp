@@ -228,4 +228,4 @@ if __name__ == '__main__':
     #     cnt += 1
     #     if cnt % 100 == 0:
     #         print(cnt)
-    gen_train_test()
+    gen_i_fashion_train()
