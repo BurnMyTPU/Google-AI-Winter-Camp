@@ -5,11 +5,8 @@ angular.
   module('fashionUpload').
   component('fashionUpload', {
     templateUrl: 'fashion-upload/fashion-upload.template.html',
-    controller: function FashionUploadController($scope, $http,$location) {
-      var self = this;
-      $http.get('fashions/fashion.json').then(function(response) {
-        self.fashions = response.data;
-      });
+    controller: function FashionUploadController($rootScope, $scope, $http, $location, svc) {
+      
 
       $scope.form = [];
       $scope.files = [];
@@ -23,17 +20,30 @@ angular.
 
         // Define what happens on successful data submission
         XHR.addEventListener("load", function(event) {
-          // alert(event.target.responseText);
+          
+          var jsonResponse = JSON.parse(event.target.responseText);
+          var newfashions= [];
+          console.log(jsonResponse);
+          for(var i = 0; i < jsonResponse.length; i++) {
+            newfashions.push(jsonResponse[i]);
+          }
+          // console.log(newfashions);
+          //send fashion 
+          svc.setMessage(newfashions);
+          console.log(svc.getMessage());
+          $scope.$apply();
+          return jsonResponse;
+
         });
 
         // Define what happens in case of error
         XHR.addEventListener("error", function(event) {
-          alert('Oops! Something went wrong.');
+          alert('Sorry, too many request QAQ!.');
         });
 
         // Set up our request
         // XHR.open("POST", "http://34.80.200.205/post/");
-        XHR.open("POST", "http://127.0.0.1:8001/post/");
+        XHR.open("POST", "http://34.80.196.77/post/");
         
         // The data sent is what the user provided in the form
         XHR.send(FD);
@@ -57,13 +67,19 @@ angular.
   };
 
   $scope.UploadImg = function(){
+    // define json
+    // updata $scope 
       sendData();
-      $location.path('/fashions').replace()
-  }
+      
+      
+      
+      $location.path('/fashions').replace();
+      
+  };
 
   // sidebar
   $scope.openNav = function(){
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "175px";
   }
 
   $scope.closeNav = function(){

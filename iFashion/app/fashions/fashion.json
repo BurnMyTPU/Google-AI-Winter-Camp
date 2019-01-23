@@ -2,21 +2,21 @@
   "image_id": "1",
   "snippet": "Fashions1",
   "imageUrl": "img/fashions/2",
-  "label": ["skirt","light","sweet"]
+  "label": ["skirt","light","sexy","female"]
 }, {
  "image_id": "2",
   "snippet": "Fashions1",
   "imageUrl": "img/fashions/5",
-  "label": ["skirt","light","sweet"]
+  "label": ["female","light","sweet"]
 }, {
   "image_id": "3",
   "snippet": "Fashions1",
   "imageUrl": "img/fashions/4",
-  "label": ["skirt","light","sweet"]
+  "label": ["skirt","light","sweet","female"]
 }, {
   "image_id": "4",
   "snippet": "Fashions1",
-  "imageUrl": "img/fashions/3",
+  "imageUrl": "img/fashions/7",
   "label": ["skirt","light","sweet"]
 }, {
   "image_id": "5",
