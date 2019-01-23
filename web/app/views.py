@@ -45,7 +45,7 @@ def query_imgs(request):
         for idx, imageid in enumerate(selected_ids):
             item = {}
             item['image_id'] = imageid
-            item['url'] = '../static/images_set/{}'.format(imageid)
+            item['imageUrl'] = '../static/images_set/{}'.format(imageid)
             item['attrs'] = selected_attributes[idx]
             ret.append(item)
         print(ret)
