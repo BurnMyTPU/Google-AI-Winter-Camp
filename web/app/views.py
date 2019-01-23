@@ -49,7 +49,7 @@ def query_imgs(request):
         model_weights = '/home/ubuntu/flower/app/model/weights_6.h5'
         global data, predicted_class
         # data, predicted_class = flower.model_predict(imagePath, model_str, model_weights, nb_classes, width)
-        with open('./fashion.json') as data_file:
+        with open('/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/app/fashion.json') as data_file:
             data = json.load(data_file)
         # res = json.dumps(data)
         return HttpResponse(data)
