@@ -11,52 +11,55 @@ import os
 from app.models import *
 import json
 import numpy as np
+import torch
 
 
-def query_items():
-    '''
-    0: accept items
-    1: compute similarity
-    2: sort scores
-    3: return top N result in json format
-    :return:
-    '''
-    pass
+def index(request):
+    return render_to_response("test.html")
 
 
-def query_imgs(request):
-    '''
-    0: accept imgs
-    1: compute similarity
-    2: sort scores
-    3: return top N result in json format
-    :return:
-    '''
-    if request.method == 'POST':
-        base_dir = '/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/upload/'
-        filename = request.FILES['image'].name
-        # imagePath = '/home/ubuntu/flower/media/uploads/' + str(int(time.time() * 1000)) + "-" + filename
-        imagePath = os.path.join(base_dir, filename)
-        print('imagePath is ', imagePath)
-        destination = open(imagePath, 'wb+')
-        for chunk in request.FILES['image'].chunks():
-            destination.write(chunk)
-        destination.close()
+class FashionWeb:
+    @staticmethod
+    def __init__(self):
+        self.model_path = ''
+        self.net = self.load_net(self.model_path)
 
-        width = 50
-        nb_classes = 6
-        model_str = '/home/ubuntu/flower/app/model/model.json'
-        model_weights = '/home/ubuntu/flower/app/model/weights_6.h5'
-        global data, predicted_class
-        # data, predicted_class = flower.model_predict(imagePath, model_str, model_weights, nb_classes, width)
-        with open('/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/app/fashion.json') as data_file:
-            data = json.load(data_file)
-        # res = json.dumps(data)
-        return HttpResponse(data)
+    def load_net(self):
+        pass
 
-    else:
-        return HttpResponse("No Post!")
+    # def query_items(self):
+    #     '''
+    #     0: accept items
+    #     1: compute similarity
+    #     2: sort scores
+    #     3: return top N result in json format
+    #     :return:
+    #     '''
+    #     pass
+    @staticmethod
+    def query_imgs(request):
+        '''
+        0: accept imgs
+        1: compute similarity
+        2: sort scores
+        3: return top N result in json format
+        :return:
+        '''
+        if request.method == 'POST':
+            base_dir = '/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/upload/'
+            filename = request.FILES['image'].name
+            image_path = os.path.join(base_dir, filename)
+            print('imagePath is ', image_path)
+            destination = open(image_path, 'wb+')
+            for chunk in request.FILES['image'].chunks():
+                destination.write(chunk)
+            destination.close()
+            with open('/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/app/fashion.json') as data_file:
+                data = json.load(data_file)
+            # res = json.dumps(data)
+            return HttpResponse(data)
+        else:
+            return HttpResponse("Post method is required!\n--Burn my tpu team")
 
-
-def get_recommended():
-    pass
+    def get_recommended():
+        pass
