@@ -56,10 +56,9 @@ class FashionWeb:
             destination.close()
             with open('/home/chaopengzhangpku/workspace/Google-AI-Winter-Camp/web/app/fashion.json') as data_file:
                 data = json.load(data_file)
+
             # res = json.dumps(data)
-            return HttpResponse(data)
+            return JsonResponse(data)
         else:
             return HttpResponse("Post method is required!\n--Burn my tpu team")
 
-    def get_recommended():
-        pass
