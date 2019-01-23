@@ -15,7 +15,7 @@ from pytorchcv.model_provider import get_model
 
 class FashionSearch:
     def __init__(self):
-        self.base_dir = 'home/chaopengzhangpku/workspace/server_data'
+        self.base_dir = '/home/chaopengzhangpku/workspace/server_data'
         self.back_bone = 'mobilenet_w1'
         self.model = os.path.join(self.base_dir, 'step_150000.pth')
         self.net = self.load_net(self.back_bone, self.model)
