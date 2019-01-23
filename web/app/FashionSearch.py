@@ -26,7 +26,7 @@ class FashionSearch:
             self.attributes = pickle.load(fp)
         with open(self.gallery_row2id_path,'rb') as fp:
             self.row2id = pickle.load(fp)
-        self.gallery_features = np.load(self.gallery_features_path).permute(1, 0)
+        self.gallery_features = np.load(self.gallery_features_path).transpose(1, 0)
         self.gallery_features = torch.Tensor(self.gallery_features).cuda()
         self.top_k = 20
         self.base_size = 128

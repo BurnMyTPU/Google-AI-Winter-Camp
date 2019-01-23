@@ -10,3 +10,4 @@ events.*
 /detection/yolo/weights/
 /web/static/share/
 .DS_Store
+/detection/yolo/outputs/
