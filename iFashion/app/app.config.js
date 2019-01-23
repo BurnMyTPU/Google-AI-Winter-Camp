@@ -1,19 +1,16 @@
 'use strict';
 
 angular.
-  module('fashionApp').
+  module('phonecatApp').
   config(['$routeProvider',
     function config($routeProvider) {
       $routeProvider.
-        when('/', {
-          template: '<fashion-list></fashion-list>'
+        when('/phones', {
+          template: '<phone-list></phone-list>'
         }).
-        when('/fashions', {
-          template: '<fashion-list></fashion-list>'
+        when('/phones/:phoneId', {
+          template: '<phone-detail></phone-detail>'
         }).
-        when('/upload', {
-          template: '<fashion-upload></fashion-upload>'
-        }).
-        otherwise('/fashions');
+        otherwise('/phones');
     }
   ]);

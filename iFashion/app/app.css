@@ -2,38 +2,53 @@ body {
   padding: 20px;
 }
 
-
-/* View: Phone list */
-.fashion {
-  list-style: none;
-  padding-top: 10px;
+h1 {
+  border-bottom: 1px solid gray;
+  margin-top: 0;
 }
 
+/* View: Phone list */
+.phones {
+  list-style: none;
+}
 
-/*.fashion li {
+.phones li {
   clear: both;
-  height: 215px;
+  height: 115px;
   padding-top: 15px;
 }
 
 .thumb {
   float: left;
-  height: 200px;
-  margin: -0.5em 1em 1.5em 1em;
+  height: 100px;
+  margin: -0.5em 1em 1.5em 0;
   padding-bottom: 1em;
-  width: 200px;
-}*/
+  width: 100px;
+}
 
 /* View: Phone detail */
 .phone {
   background-color: white;
-  border: 1px solid black;
+  display: none;
   float: left;
   height: 400px;
   margin-bottom: 2em;
   margin-right: 3em;
   padding: 2em;
   width: 400px;
+}
+
+.phone:first-child {
+  display: block;
+}
+
+.phone-images {
+  background-color: white;
+  float: left;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+  width: 450px;
 }
 
 .phone-thumbs {
@@ -50,6 +65,7 @@ body {
 .phone-thumbs li {
   background-color: white;
   border: 1px solid black;
+  cursor: pointer;
   display: inline-block;
   margin: 1em;
 }

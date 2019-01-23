@@ -1,8 +1,10 @@
 'use strict';
 
 // Define the `phonecatApp` module
-angular.module('fashionApp', [
+angular.module('phonecatApp', [
+  'ngAnimate',
   'ngRoute',
-  'fashionList',
-  'fashionUpload'
+  'core',
+  'phoneDetail',
+  'phoneList'
 ]);
