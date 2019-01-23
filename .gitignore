@@ -8,4 +8,4 @@
 events.*
 /web/upload/
 /detection/yolo/weights/
-/web/static/validation.tar
+/web/static/share/
