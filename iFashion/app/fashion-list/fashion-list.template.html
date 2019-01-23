@@ -44,13 +44,18 @@
 
       <ul class="fashion">
         <li ng-repeat="fashion in $ctrl.fashions" class="thumbnail">
-          <a href="" ng-click="chooseimg()">
-            <img ng-src="{{fashion.imageUrl}}" alt="{{fashion.name}}"/>
-            <p align="center">{{fashion.name}}</p> 
+      
+          <form id="myForm">
+            <a href="" ng-click="chooseimg()">
+            <img ng-src="{{fashion.imageUrl}}" alt="{{fashion.image_id}}" name="image"/>
+            <p align="center">{{fashion.image_id}}</p> 
           </a>
+          </form>
+          
           <!-- <a href="#!/Fashions/{{fashion.id}}" class="thumb" align="center"> -->
             
         </li>
+        <button ng-click="TestButn()">Test Button</button>
       </ul>
       
     </div>

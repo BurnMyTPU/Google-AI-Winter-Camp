@@ -27,21 +27,19 @@
   <div class="row">
     <div class="container">
       <div class="col-xs-12">
-          <form ng-submit="submit()" name="form" role="form" layout-align="center center">
+          <form   layout-align="center center" id="uploadform">
         <p align="center">
-           <input ng-model="form.image" type="file" class="form-control" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)" style="width:200px"  >
+           <input ng-model="form.image" type="file" name="image" class="form-control" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)" style="width:200px"  >
           <img ng-src="{{image_source}}" style="width:400px;" >
-        </p>
-
-        <p align="center">
-        <input type="submit" id="submit" value="Upload" />
-        </p>
-        <p align="center">
+          <p align="center">
+          <input type="submit" id="submit" value="Upload" ng-click="UploadImg()"/>
+          </p>
+          <p align="center">
+          </p>
         </p>
         <br/>
       
       </form>
-        
       </div>
       
     </div>
