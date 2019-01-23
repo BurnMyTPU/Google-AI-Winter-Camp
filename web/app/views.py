@@ -18,7 +18,7 @@ fashionSearch = FashionSearch()
 
 
 def index(request):
-    return render_to_response("test.html")
+    return render_to_response("demo.html")
 
 
 def query_imgs(request):
