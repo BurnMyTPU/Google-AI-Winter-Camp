@@ -22,8 +22,10 @@ class FashionSearch:
         self.gallery_features_path = os.path.join(self.base_dir, 'features.npy')
         self.gallery_attributes_path = os.path.join(self.base_dir, 'attributes.pkl')
         self.gallery_row2id_path = os.path.join(self.base_dir, 'row2id.pkl')
-        self.attributes = pickle.load(self.gallery_attributes_path)
-        self.row2id = pickle.load(self.gallery_row2id_path)
+        with open(self.gallery_attributes_path,'rb') as fp:
+            self.attributes = pickle.load(self.gallery_attributes_path)
+        with open(self.gallery_row2id_path,'rb') as fp:
+            self.row2id = pickle.load(self.gallery_row2id_path)
         self.gallery_features = np.load(self.gallery_features_path).permute(1, 0)
         self.gallery_features = torch.Tensor(self.gallery_features).cuda()
         self.top_k = 20
