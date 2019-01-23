@@ -1,7 +1,6 @@
 import os
 import json
 import math
-import torch
 import numpy as np
 
 
@@ -9,8 +8,15 @@ def gen_candidates(name, num):
     json_pth = '/home/lixiazhiguang/Data/%s.json' % name
     with open(json_pth) as fp:
         json_obj = json.load(fp)
-
     annos = json_obj['annotations']
+
+    root_dir = '/home/lixiazhiguang/Data'
+    miss_pth = '%s/missing-images.txt' % root_dir
+    with open(miss_pth) as fp:
+        misses = fp.readlines()
+    misses = set([miss[:-1] for miss in misses])
+
+    annos = [anno for anno in annos if anno['imageId'] not in misses]
     annos = np.random.choice(annos, num)
 
     for anno in annos:
@@ -37,35 +43,36 @@ def str_distance(str1, str2):
 
     return matrix[len1-1][len2-1] + abs(len1 - len2)
 
+def set_iou(set1, set2):
+    inter = len(set1 & set2)
+    union = len(set1 | set2)
+    return inter / union
+
 
 def main():
     val_anno_map = gen_candidates('validation', 1000)
-    train_anno_map = gen_candidates('train', 10000)
+    train_anno_map = gen_candidates('train', 100000)
 
     val_ids = list(val_anno_map.keys())
     train_ids = list(train_anno_map.keys())
 
+    key_query = {}
     val_num, train_num = len(val_ids), len(train_ids)
-    matrix = np.zeros((val_num, train_num), dtype=np.int16)
     for i, val_id in enumerate(val_ids):
-        str1 = val_anno_map[val_id]
-        for j, train_id in enumerate(train_ids):
-            str2 = train_anno_map[train_id]
-            dist = str_distance(str1, str2)
-            matrix[i][j] = dist
-        if i % 10 == 0:
+        set1 = set(val_anno_map[val_id])
+        key_query[val_id] = []
+        for train_id in train_ids:
+            set2 = set(train_anno_map[train_id])
+            iou = set_iou(set1, set2)
+            if iou >= 0.5:
+                key_query[val_id].append(train_id)
+
+        if i % 100 == 0:
             print(i, val_id)
 
-    key_query = {}
-    tensor = torch.Tensor(matrix)
-    topks = torch.topk(tensor, 100, dim=1, largest=False)[1]
-    topks = topks.numpy()
-    for i, val_id in enumerate(val_ids):
-        key_query[val_id] = [train_ids[j] for j in topks[i]]
-
-    np.save('val_ids.npy', val_ids)
-    np.save('train_ids.npy', train_ids)
-    np.save('key_query.npy', key_query)
+    np.save('./npys/validation_ids.npy', val_ids)
+    np.save('./npys/train_ids.npy', train_ids)
+    np.save('./npys/key_query.npy', key_query)
 
 
 main()
