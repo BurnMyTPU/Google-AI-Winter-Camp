@@ -42,7 +42,7 @@ test:
 
   input_shape: [544, 544]
   batch_size: 8
-  weights: "weights/weights_600.pt"
+  weights: "weights/weights_10000.pt"
 
   conf_thresh: 0.005
   nms_thresh: 0.45
