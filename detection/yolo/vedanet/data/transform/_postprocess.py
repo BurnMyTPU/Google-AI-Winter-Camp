@@ -89,7 +89,7 @@ class GetBoundingBoxes(BaseTransform):
             print('cls max', cls_max)
             print('index', cls_max_idx)
 
-        score_thresh = cls_max > conf_thresh
+        score_thresh = cls_scores > conf_thresh
         score_thresh_flat = score_thresh.view(-1)
 
         if score_thresh.sum() == 0:
