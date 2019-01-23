@@ -58,7 +58,7 @@ class FashionWeb:
                 data = json.load(data_file)
             print(type(data))
             # res = json.dumps(data)
-            return JsonResponse(data)
+            return HttpResponse(json.dumps(data, ensure_ascii=False, indent=2))
         else:
             return HttpResponse("Post method is required!\n--Burn my tpu team")
 
