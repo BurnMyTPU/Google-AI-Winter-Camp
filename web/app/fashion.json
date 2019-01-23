@@ -1,0 +1,28 @@
+[{
+  "name": "1",
+  "snippet": "Fashions1",
+  "imageUrl": "img/fashions/1",
+  "feature": ["skirt","light","sweet"]
+}, {
+ "name": "2",
+  "snippet": "Fashions1",
+  "imageUrl": "img/fashions/2",
+  "feature": ["skirt","light","sweet"]
+}, {
+  "name": "3",
+  "snippet": "Fashions1",
+  "imageUrl": "img/fashions/6",
+  "feature": ["skirt","light","sweet"]
+}, {
+  "name": "4",
+  "snippet": "Fashions1",
+  "imageUrl": "img/fashions/4",
+  "feature": ["skirt","light","sweet"]
+}, {
+  "name": "5",
+  "snippet": "Fashions1",
+  "imageUrl": "img/fashions/5",
+  "feature": ["skirt","light","sweet"]
+}
+    
+]

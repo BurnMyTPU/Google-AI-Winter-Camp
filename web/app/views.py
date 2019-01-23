@@ -49,9 +49,10 @@ def query_imgs(request):
         model_weights = '/home/ubuntu/flower/app/model/weights_6.h5'
         global data, predicted_class
         # data, predicted_class = flower.model_predict(imagePath, model_str, model_weights, nb_classes, width)
-        data = ['img1', 'img2', 'img3', 'img4']
-        res = json.dumps(data)
-        return HttpResponse(res)
+        with open('fashion.json') as data_file:
+            data = json.load(data_file)
+        # res = json.dumps(data)
+        return HttpResponse(data)
 
     else:
         return HttpResponse("No Post!")
