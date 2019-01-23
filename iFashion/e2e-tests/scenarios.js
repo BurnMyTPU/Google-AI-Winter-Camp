@@ -5,15 +5,15 @@
 
 describe('PhoneCat Application', function() {
 
-  it('should redirect `index.html` to `index.html#!/phones', function() {
+  it('should redirect `index.html` to `index.html#!/Fashion', function() {
     browser.get('index.html');
-    expect(browser.getCurrentUrl()).toContain('index.html#!/phones');
+    expect(browser.getCurrentUrl()).toContain('index.html#!/Fashion');
   });
 
   describe('View: Phone list', function() {
 
     beforeEach(function() {
-      browser.get('index.html#!/phones');
+      browser.get('index.html#!/Fashion');
     });
 
     it('should filter the phone list as a user types into the search box', function() {
@@ -75,23 +75,6 @@ describe('PhoneCat Application', function() {
 
     it('should display the `nexus-s` page', function() {
       expect(element(by.binding('$ctrl.phone.name')).getText()).toBe('Nexus S');
-    });
-
-    it('should display the first phone image as the main phone image', function() {
-      var mainImage = element(by.css('img.phone.selected'));
-
-      expect(mainImage.getAttribute('src')).toContain('img/phones/nexus-s.0.jpg');
-    });
-
-    it('should swap the main image when clicking on a thumbnail image', function() {
-      var mainImage = element(by.css('img.phone.selected'));
-      var thumbnails = element.all(by.css('.phone-thumbs img'));
-
-      thumbnails.get(2).click();
-      expect(mainImage.getAttribute('src')).toContain('img/phones/nexus-s.2.jpg');
-
-      thumbnails.get(0).click();
-      expect(mainImage.getAttribute('src')).toContain('img/phones/nexus-s.0.jpg');
     });
 
   });
