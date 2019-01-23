@@ -46,12 +46,13 @@ class FashionSearch:
         net.output = nn.Sequential()
         state_dict = torch.load(weight_path)
         net.load_state_dict(state_dict, strict=False)
+        net.cuda()
         net.eval()
         return net
 
     def get_feature(self, img_path):
         image = Image.open(img_path).convert('RGB')
-        image = self.val_transform(image).cuda()
+        image = self.val_transform(image).cuda().unsqueeze(dim=0)
         with torch.no_grad():
             feature = self.net(image)
         # 1 * 1024
