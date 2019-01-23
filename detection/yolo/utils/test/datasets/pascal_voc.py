@@ -26,6 +26,7 @@ class pascal_voc(imdb):
         self._image_set = image_set
         self._devkit_path = '/data2/yichaoxiong/data/VOCdevkit'
         self._data_path = os.path.join(self._devkit_path, 'VOC' + self._year)
+        print(self._data_path)
         self._classes = ('__background__', # always index 0
                          'fashion')
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
