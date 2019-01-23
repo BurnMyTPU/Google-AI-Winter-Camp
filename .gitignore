@@ -4,6 +4,7 @@
 *.pyc
 *.json
 *.npy
+*.pkl
 events.*
 /web/upload/
 /detection/yolo/weights/
