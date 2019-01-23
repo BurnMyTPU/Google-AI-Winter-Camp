@@ -70,5 +70,6 @@ class FashionSearch:
 
 if __name__ == '__main__':
     fashion_search = FashionSearch()
+
     test_img = '/home/chaopengzhangpku/workspace/dataset/fashion/validation/7563'
     print(fashion_search.get_prediction(test_img))
