@@ -1,5 +1,5 @@
 .*.py.swp
-.idea/misc.xml
+/.idea/
 *.xml
 *.pyc
 *.json
@@ -9,3 +9,5 @@ events.*
 /web/upload/
 /detection/yolo/weights/
 /web/static/share/
+.DS_Store
+/detection/yolo/outputs/

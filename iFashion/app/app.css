@@ -2,13 +2,28 @@ body {
   padding: 20px;
 }
 
+.container {
+   padding-right: 15px;
+   padding-left: 15px;
+   margin-right: auto;
+   margin-left: auto;
+}
+.fontsizes{font-size:21px}
+
+.onespan{ 
+position:absolute;
+text-align:center; 
+display:block;
+top:0px;
+left:10px;
+} 
 
 /* View: Phone list */
-.fashion {
+/*.fashion {
   list-style: none;
   padding-top: 10px;
 }
-
+*/
 
 /*.fashion li {
   clear: both;

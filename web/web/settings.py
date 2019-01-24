@@ -24,7 +24,7 @@ SECRET_KEY = '!hpfrw%f2%h1evbuk*147#yit=cwz67*@f(v%p*63hsa=64f=z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.80.200.205']
+ALLOWED_HOSTS = ['34.80.200.205', '34.80.196.77']
 
 # Application definition
 
@@ -35,9 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +57,9 @@ STATICFILES_DIRS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates"),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'web.wsgi.application'
+CORS_ORIGIN_ALLOW_ALL = True   
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

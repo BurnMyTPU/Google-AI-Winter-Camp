@@ -1,50 +1,75 @@
 <div class="container-fluid">
   <div class="row">
-  <header class="jumbotron">
+   <header class="jumbotron">
         <div class="container">
             <div class="row row-header">
-                <div class="col-xs-12">
-                  <div id="mySidenav" class="sidenav">
+                <div class="col-xs-1">
+                  <div id="mySidenav" class="sidenav" >
                     <a class="closebtn" ng-click="closeNav()">&times;</a>
-                    <a href="#!/fashions">Home</a>
-                    <a href="#!/upload/">Upload</a>
+                    <a href="#">Home</a>
+                    <a  href="#!/upload/">Upload</a>
                     <a href="https://github.com/BurnMyTPU/">Code</a>
                     <a href="#">About</a>
                   </div>
-                  <span style="font-size:30px;cursor:pointer" ng-click="openNav()">&#9776;</span>
-                  <div class="absoluteCenter">
-                    <h1 align="center">I ❤️ Fashion</h1>
-                    <h3 align="center">Pick up your favourite one! Upload your cloths image!</h3>
+                    <!-- <button type="button" class="btn btn-default" ng-click="openNav()">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button> -->
+                  <span style="font-size:30px;cursor:pointer" ng-click="openNav()" class="onespan">&#9776;</span>
+                  </div>
+                  
+                  <div class="col-xs-10">
+                    <div class="absoluteCenter">
+                      <h1 align="center">I ❤️ Fashion</h1>
+                      <h4 align="center">Choose your fashion image!</h4>
+                    </div>
+                  </div>
+                 
+
+                    <!-- <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </button> -->
                   </div>
                     
-                </div>
+                
             </div>
         </div>
     </header>
 </div>
 
 <body>
-  <div class="row">
-    <div class="container">
-      <div class="col-xs-12">
-          <form ng-submit="submit()" name="form" role="form" layout-align="center center">
-        <p align="center">
-           <input ng-model="form.image" type="file" class="form-control" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)" style="width:200px"  >
-          <img ng-src="{{image_source}}" style="width:400px;" >
-        </p>
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-xs-12" style="z-index:0;position: relative;">
+        <!-- <form>
+          <input id="input-b1" name="image" type="file" class="form-control file" accept="image/*" data-browse-on-zone-click="true">
+        </form> -->
+          <form   layout-align="center center" id="uploadform">
 
-        <p align="center">
-        <input type="submit" id="submit" value="Upload" />
+           <!--  <p align="center">
+            <div class="uploader__input-box">
+            <input ng-model="form.image" type="file" name="image" class="form-control uploader__input" accept="image/*"  onchange="angular.element(this).scope().uploadedFile(this)" style="width:200px"/>
+            </div>
+            <img ng-src="{{image_source}}" style="width:200px;" align="center">
+            <input type="submit" id="submit" value="Upload" ng-click="UploadImg()"/>
+            <input id="file-0d" class="file" type="file" accept="image/*" data-theme="fas">
         </p>
-        <p align="center">
-        </p>
-        <br/>
-      
+ -->
+        <!-- <input id="input-b1" name="input-b1" type="file" class="file" accept="image/*" data-browse-on-zone-click="true"> -->
+        <div class="file-loading" >
+                <input id="file-0d" class="file" type="file" accept="image/*" data-theme="fas" ngf-select="onFileSelect($files)"">
+        </div>
       </form>
+      <!-- <form enctype="multipart/form-data">
         
-      </div>
-      
+    </form> -->
+    </div> 
     </div>
+    <!-- <div class="row">
+      <div class="col-xs-12">
+        <input id="input-b1" name="input-b1" type="file" class="file" accept="image/*" data-browse-on-zone-click="true">
+      </div>
+    </div> -->
     
   </div>
 </body>

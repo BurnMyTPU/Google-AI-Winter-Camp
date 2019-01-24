@@ -73,7 +73,6 @@ class GetBoundingBoxes(BaseTransform):
 
         conf_scores = network_output[:, :, 4, :]  ## mileistone
 
-        print('num_class', num_classes)
         # Compute class_score
         if num_classes > 1:
             if torch.__version__.startswith('0.3'):
@@ -86,8 +85,6 @@ class GetBoundingBoxes(BaseTransform):
         else:
             cls_max = network_output[:, :, 4, :]
             cls_max_idx = torch.zeros_like(cls_max)
-            print('cls max', cls_max)
-            print('index', cls_max_idx)
 
         score_thresh = cls_scores > conf_thresh
         score_thresh_flat = score_thresh.view(-1)

@@ -1,23 +1,16 @@
 [{
-  "name": "Fashions2",
-  "snippet": "Fashions2",
-  "imageUrl": "img/fashions/5"
-}, {
- "name": "Fashions3",
-  "snippet": "Fashions3",
-  "imageUrl": "img/fashions/6"
-}, {
-  "name": "Fashions3",
-  "snippet": "Fashions3",
-  "imageUrl": "img/fashions/7"
-}, {
-  "name": "Fashions3",
-  "snippet": "Fashions3",
-  "imageUrl": "img/fashions/8"
-}, {
-  "name": "Fashions3",
+  "image_id": "6",
   "snippet": "Fashions1",
-  "imageUrl": "img/fashions/9"
-}
-    
-]
+  "imageUrl": "img/fashions/6",
+  "label": ["skirt","light","sweet"]
+}, {
+ "image_id": "6",
+  "snippet": "Fashions1",
+  "imageUrl": "img/fashions/6",
+  "label": ["skirt","light","sweet"]
+}, {
+  "image_id": "6",
+  "snippet": "Fashions1",
+  "imageUrl": "img/fashions/6",
+  "label": ["skirt","light","sweet"]
+}]

@@ -4,7 +4,7 @@ backup_name: "weights"
 log_name: "logs"
 labels: ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor","fashion"]
 
-data_root_dir: "/home/chaopengzhangpku/workspace/dataset/fashion_Devkit/onedet_cache"
+data_root_dir: "/home/chaopengzhangpku/workspace/dataset/i_Fashion_Devkit/onedet_cache"
 
 train:
   dataset: "train"
@@ -37,12 +37,12 @@ test:
   dataset: "test"
   stdout: True
   gpus: "0"
-  nworkers: 8
+  nworkers: 1 #8
   pin_mem: True
 
   input_shape: [544, 544]
-  batch_size: 8
-  weights: "weights/weights_600.pt"
+  batch_size: 1 #8
+  weights: "weights/weights_10000.pt"
 
   conf_thresh: 0.005
   nms_thresh: 0.45
