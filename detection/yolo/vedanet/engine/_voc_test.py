@@ -137,7 +137,7 @@ def VOCTest(hyper_params):
         key_val = len(det)
         anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
         det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
-
+        break
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)
     voc_wrapper.genResults(reorg_dets, results, nms_thresh)

@@ -73,6 +73,7 @@ class BramboxDataset(Dataset):
             raise IndexError(f'list index out of range [{index}/{len(self)-1}]')
 
         # Load
+        print('In Load path: {}'.format(self.id(self.keys[index])))
         img = Image.open(self.id(self.keys[index]))
         anno = copy.deepcopy(self.annos[self.keys[index]])
         random.shuffle(anno)
