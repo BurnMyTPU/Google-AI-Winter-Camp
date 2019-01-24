@@ -55,7 +55,7 @@ def VOCTest(hyper_params):
     nms_thresh = hyper_params.nms_thresh
     # prefix = hyper_params.prefix
     results = hyper_params.results
-    # print('hyper_params.classes :', hyper_params.classes) # 21
+
     test_args = {'conf_thresh': conf_thresh, 'network_size': network_size, 'labels': labels}
     net = models.__dict__[model_name](hyper_params.classes, weights, train_flag=2, test_args=test_args)
     net.eval()
@@ -95,12 +95,7 @@ def VOCTest(hyper_params):
         key_val = len(anno)
         anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
         det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
-        # print(anno)
-        print(det)
-        break
+
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
-    print('reorg_dets')
-    print(reorg_dets)
-    return
     voc_wrapper.genResults(reorg_dets, results, nms_thresh)
