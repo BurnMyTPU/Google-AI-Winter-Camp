@@ -127,6 +127,7 @@ def VOCTest(hyper_params):
     anno, det = {}, {}
     num_det = 0
     for idx, (data, box) in enumerate(loader):
+        print('idx {}'.format(idx))
         if (idx + 1) % 20 == 0:
             log.info('%d/%d' % (idx + 1, len(loader)))
         if use_cuda:
