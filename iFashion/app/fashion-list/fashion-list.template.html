@@ -1,68 +1,59 @@
 <div class="container-fluid">
   <div class="row">
-  <header class="jumbotron">
+     <header class="jumbotron">
         <div class="container">
             <div class="row row-header">
-              <div class="col-xs-1">
-                
-              </div>
-                <div class="col-xs-12">
+                <div class="col-xs-1">
                   <div id="mySidenav" class="sidenav">
                     <a class="closebtn" ng-click="closeNav()">&times;</a>
-                    <a href="#!/fashions">Home</a>
+                    <a href="#">Home</a>
                     <a href="#!/upload/">Upload</a>
                     <a href="https://github.com/BurnMyTPU/">Code</a>
                     <a href="#">About</a>
                   </div>
-                  <span style="font-size:30px;cursor:pointer" ng-click="openNav()">&#9776;</span>
-                  <div class="absoluteCenter">
-                    <h1 align="center" ng-init="h_1='I ❤️ Fashion'">{{h_1}}</h1>
-                    <h3 align="center">Pick up your favourite one! Upload your cloths image!</h3>
+                    <!-- <button type="button" class="btn btn-default" ng-click="openNav()">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button> -->
+                  <span style="font-size:30px;cursor:pointer" ng-click="openNav()" class="onespan">&#9776;</span>
+                  </div>
+                  
+                  <div class="col-xs-10">
+                    <div class="absoluteCenter">
+                      <h1 align="center">I ❤️ Fashion</h1>
+                      <h4 align="center">Pick up your favourite one!</h4>
+                    </div>
+                  </div>
+                 
+
+                    <!-- <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </button> -->
                   </div>
                     
-                </div>
+                
             </div>
         </div>
     </header>
 </div>
 
 <div class="container">
-<div class="row">
-  
-    <div class="col-md-2">
-        <!-- Sidebar -->
-      <!-- <div class="sidenav">
-        <a href="#choose">Choose Image</a>
-        <a href="#sourcecode">Source Code</a>
-        <a href="#about">About Team</a>
-      </div> -->
-
+  <div class="row">  
+      <div class="col-xs-11"> 
+        <!--Body content-->
+        <ul class="absoluteCenter">
+          <li ng-repeat="fashion in $ctrl.fashions" class="thumbnail">
+            <form id="myForm">
+              <a href="" ng-click="chooseimg()">
+                <img ng-src="{{fashion.imageUrl}}" alt="{{fashion.image_id}}" name="image"/>
+                <br>
+                <p align="center" class="fontsizes">{{fashion.label[0]+" "+fashion.label[1]+" "+fashion.label[2]+" "+fashion.label[3]}}</p> 
+              </a>
+            </form>
+          </li>
+        </ul>
+      </div>
     </div>
-    
-    <div>
-      <!--Body content-->
-
-      <ul class="fashion">
-        <li ng-repeat="fashion in $ctrl.fashions" class="thumbnail">
-      
-          <form id="myForm">
-            <a href="" ng-click="chooseimg()">
-            <img ng-src="{{fashion.imageUrl}}" alt="{{fashion.image_id}}" name="image"/>
-            <p align="center">{{fashion.image_id}}</p> 
-          </a>
-          </form>
-          
-          <!-- <a href="#!/Fashions/{{fashion.id}}" class="thumb" align="center"> -->
-            
-        </li>
-        <button ng-click="TestButn()">Test Button</button>
-      </ul>
-      
     </div>
-
-  </div>
-    
-  </div>
 </div>
 
 

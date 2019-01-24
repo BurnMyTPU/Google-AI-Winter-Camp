@@ -5,43 +5,42 @@ angular.
   module('fashionList').
   component('fashionList', {
     templateUrl: 'fashion-list/fashion-list.template.html',
-    controller: function FashionListController($scope, $http) {
+    controller: function FashionListController($scope, $http, svc,$timeout) {
       var self = this;
+      var testJson;
       $http.get('fashions/fashion.json').then(function(response) {
-        self.fashions = response.data;
+        testJson = response.data;
+        self.fashions= response.data;
       });
 
     $scope.form = [];
     $scope.files = [];
+    
+    // self.fashions=svc.getMessage();
+    // $scope.$apply();
+    $timeout(function() { $scope.$apply(); },10);
+
+    $scope.$watch(svc.getMessage,function(v){
+      console.log("v");
+      console.log(v);
+      console.log(svc.getMessage());
+      // alert(v);
+      self.fashions= v;
+      
+        $scope.$apply();
+      
+
+      
+    });
+
+    
 
 
-    $scope.submit = function() {
-    $scope.form.image = $scope.files[0];
+  
 
-
-
-    // var blob = new Blob(byteArrays, { type: contentType });
-    // var file = new File([blob], filename, {type: contentType, lastModified: Date.now()});
-
-
-    $http({
-    method  : 'POST',
-    url     : 'http://127.0.0.1:8001/post/',
-    processData: false,
-    transformRequest: function (data) {
-        var formData = new FormData();
-        formData.append("image", $scope.form.image);  
-        return formData;  
-    },  
-        data : $scope.form,
-        headers: {
-               'Content-Type': 'multipart/form-data'
-        }
-        }).success(function(data){
-            //alert(data);
-        });
-
-    };
+    // $scope.$watch('fashions',function(){
+    //   $scope.$apply();
+    // });
 
     // src is under the url/
     function srcToFile(src, fileName, mimeType){
@@ -50,33 +49,6 @@ angular.
           .then(function(buf){return new File([buf], fileName, {type:mimeType});})
       );
     }
-
-    //Test Button
-    $scope.TestButn = function(){
-
-      // 0-fecth img
-      // 1-convert img to a file
-      // 2-tranform to formData
-      srcToFile("./test.jpg", 'new.png', 'image/png')
-      .then(function(file){
-          var fd = new FormData();
-          fd.append('image', file);
-          return fetch('http://127.0.0.1:8001/post/', {method:'POST', body:fd});
-      })
-      .then(function(res){
-          return res.text();
-      })
-      .then(console.log)
-      .catch(console.error); 
-
-      $scope.PostData = function(){
-        $http.get('http://127.0.0.1:8001/post/').then(function(response) {
-            self.fashions = response.data;
-        });
-      }
-
-    };
-
 
     // preview data
     $scope.uploadedFile = function(element) {
@@ -134,7 +106,7 @@ angular.
   //   });
  
 
-  $scope.h_1 = "I guess you will ❤️...";
+  $scope.h_1 = "I guess you will ❤️";
 
   }
 
@@ -146,7 +118,7 @@ angular.
 
   // sidebar
   $scope.openNav = function(){
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "175px";
   }
 
   $scope.closeNav = function(){
