@@ -41,7 +41,7 @@ test:
   pin_mem: True
 
   input_shape: [544, 544]
-  batch_size: 32
+  batch_size: 1
   weights: "weights/weights_10000.pt"
 
   conf_thresh: 0.005
