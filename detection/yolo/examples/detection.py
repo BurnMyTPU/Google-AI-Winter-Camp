@@ -32,4 +32,4 @@ if __name__ == '__main__':
     print(hyper_params)
     #
     # # init and run eng
-    vn.engine.VOCTest(hyper_params)
+    # vn.engine.VOCTest(hyper_params)
