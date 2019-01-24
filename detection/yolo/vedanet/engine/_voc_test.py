@@ -81,6 +81,7 @@ def VOCTest_Single(hyper_params, img_path):
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
     ret = voc_wrapper.genResults_Single(reorg_dets, results, nms_thresh)
     print(ret)
+    return ret
 
 
 def VOCTest(hyper_params):

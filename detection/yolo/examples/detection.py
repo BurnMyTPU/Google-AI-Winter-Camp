@@ -16,12 +16,17 @@ import brambox.boxes as bbb
 import vedanet as vn
 from utils.envs import initEnv
 
+
+class Detection:
+
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='OneDet: an one stage framework based on PyTorch')
     # parser.add_argument('model_name', help='model name', default='yolov3')
     # parser.add_argument('img', help='image path', default=None)
     # args = parser.parse_args()
-    img_path = '/home/chaopengzhangpku/workspace/dataset/i_Fashion_Devkit/i_fashion2019/JPEGImages/1'
+    image_dir = '/home/chaopengzhangpku/workspace/dataset/fashion/validation'
     model_name = 'Yolov3'
     train_flag = 2  # Test
     config = initEnv(train_flag=train_flag, model_name=model_name)  # args.model_name)
@@ -30,8 +35,11 @@ if __name__ == '__main__':
 
     # init env
     hyper_params = vn.hyperparams.HyperParams(config, train_flag=train_flag)
-    # print(hyper_params)
-    #
-    # # init and run eng
-    vn.engine.VOCTest_Single(hyper_params, img_path)
-    # vn.engine.VOCTest(hyper_params)
+    fw = open('./val_result.txt', 'w')
+    imgs = os.listdir(image_dir)
+    for img in image_dir:
+        img_path = os.pardir.join(image_dir, img)
+        # # init and run eng
+        ret = vn.engine.VOCTest_Single(hyper_params, img_path)
+        fw.write(img + ' ' + str(ret) + '\n')
+    fw.close()
