@@ -97,9 +97,10 @@ def VOCTest(hyper_params):
         det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
         # print(anno)
         print(det)
+        break
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
     print('reorg_dets')
     print(reorg_dets)
-    return 
+    return
     voc_wrapper.genResults(reorg_dets, results, nms_thresh)
