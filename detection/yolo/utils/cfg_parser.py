@@ -22,5 +22,5 @@ def getConfig(cfgs_root, model_name):
     cfg_fp = './' + cfgs_root + '/' + main_cfg['cfg_dict'][model_name]
     config = parse(cfg_fp)
     # config['model_name'] = model_name
-    # print(config)
+    print(config)
     return config
