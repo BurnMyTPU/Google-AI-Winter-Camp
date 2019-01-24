@@ -36,7 +36,7 @@ class CustomDataset(vn_data.BramboxDataset):
         return img, anno
 
 
-def VOCTest_Single(hyper_params, img_path):
+def VOCTest_Single(hyper_params, img_paths):
     log.debug('Creating network')
 
     model_name = hyper_params.model_name
@@ -60,27 +60,28 @@ def VOCTest_Single(hyper_params, img_path):
     # pdb.set_trace()
     if use_cuda:
         net.cuda()
-    print('Reading Data')
-    data = Image.open(img_path)
+    ret = []
+    # loop here
+    for img_path in img_paths:
+        print('Reading Data')
+        data = Image.open(img_path)
 
-    lb = vn_data.transform.Letterbox(network_size)
-    it = tf.ToTensor()
-    img_tf = vn_data.transform.Compose([lb, it])
-    data = img_tf(data)
-    data = torch.unsqueeze(data,0)
-    print('shape {}'.format(data.shape))
-    print('Running network')
-    if use_cuda:
-        data = data.cuda()
-    with torch.no_grad():
-        output, loss = net(data, '')
-
-    det = dict()
-    det[img_path] = output[0]
-    netw, neth = network_size
-    reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
-    ret = voc_wrapper.genResults_Single(reorg_dets, results, nms_thresh)
-    print(ret)
+        lb = vn_data.transform.Letterbox(network_size)
+        it = tf.ToTensor()
+        img_tf = vn_data.transform.Compose([lb, it])
+        data = img_tf(data)
+        data = torch.unsqueeze(data, 0)
+        print('Running network')
+        if use_cuda:
+            data = data.cuda()
+        with torch.no_grad():
+            output, loss = net(data, '')
+        det = dict()
+        det[img_path] = output[0]
+        netw, neth = network_size
+        reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)
+        res = voc_wrapper.genResults_Single(reorg_dets, results, nms_thresh)
+        ret.append(str(res))
     return ret
 
 
@@ -132,14 +133,12 @@ def VOCTest(hyper_params):
             log.info('%d/%d' % (idx + 1, len(loader)))
         if use_cuda:
             data = data.cuda()
-        print('shape {}'.format(data.shape))
         with torch.no_grad():
             # output, loss = net(data, box)
             output, loss = net(data, '')
         key_val = len(det)
         anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
         det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
-        break
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)
     voc_wrapper.genResults(reorg_dets, results, nms_thresh)
