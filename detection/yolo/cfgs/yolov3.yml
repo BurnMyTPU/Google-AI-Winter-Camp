@@ -4,7 +4,7 @@ backup_name: "weights"
 log_name: "logs"
 labels: ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor","fashion"]
 
-data_root_dir: "/home/chaopengzhangpku/workspace/dataset/fashion_Devkit/onedet_cache"
+data_root_dir: "/home/chaopengzhangpku/workspace/dataset/i_Fashion_Devkit/onedet_cache"
 
 train:
   dataset: "train"
