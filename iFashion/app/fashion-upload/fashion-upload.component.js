@@ -5,7 +5,31 @@ angular.
   module('fashionUpload').
   component('fashionUpload', {
     templateUrl: 'fashion-upload/fashion-upload.template.html',
-    controller: function FashionUploadController($rootScope, $scope, $http, $location, svc) {
+    controller: function FashionUploadController($rootScope, $scope, $http, $location, $window,svc) {
+      
+      $("#file-0d").fileinput({
+        showUpload : true,
+        uploadUrl: "http://34.80.196.77/post/",// 上传请求路径
+        maxFileCount: 1,
+        previewFileType: "image",
+        browseClass: "btn btn-success",
+        browseLabel: "Pick Image",
+        browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+        removeClass: "btn btn-danger",
+        removeLabel: "Delete",
+        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+        uploadClass: "btn btn-info",
+        uploadLabel: "Upload",
+        uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
+        autoReplace : true,
+        fileActionSettings:{showUpload: false,
+                            showZoom: false,
+                            showDrag: false,
+                            showUpload: false
+        },
+        showRemove : false
+    });
+     
       
 
       $scope.form = [];
@@ -43,12 +67,31 @@ angular.
 
         // Set up our request
         // XHR.open("POST", "http://34.80.200.205/post/");
-        XHR.open("POST", "http://34.80.196.77/post/");
+        XHR.open("POST", "http://http://127.0.0.1:8001/post/");
         
         // The data sent is what the user provided in the form
         XHR.send(FD);
   };
 
+    $("#file-0d").on("fileuploaded", function (event, data, previewId, index) {
+        var obj = data.response;
+        var newfashions= [];
+        console.log(obj);
+        for(var i = 0; i < obj.length; i++) {
+            newfashions.push(obj[i]);
+          }
+          // console.log(newfashions);
+          //send fashion 
+        svc.setMessage(newfashions);
+        $location.path('/fashions').replace();
+        var url = $location.absUrl();//"http://" + $window.location.host + "/Account/Login";
+        console.log(url);
+        console.log(svc.getMessage());
+        $window.location.href = url;
+        // $scope.$apply();
+        // $window.location.href('#!/fashions');
+                
+    });
 
 
     $scope.uploadedFile = function(element) {
@@ -70,12 +113,10 @@ angular.
     // define json
     // updata $scope 
       sendData();
-      
-      
-      
       $location.path('/fashions').replace();
       
   };
+
 
   // sidebar
   $scope.openNav = function(){
@@ -85,9 +126,7 @@ angular.
   $scope.closeNav = function(){
     document.getElementById("mySidenav").style.width = "0px";
   }
-
-  }
-
-  });
+}
+});
 
 

@@ -4,10 +4,10 @@
         <div class="container">
             <div class="row row-header">
                 <div class="col-xs-1">
-                  <div id="mySidenav" class="sidenav">
+                  <div id="mySidenav" class="sidenav" >
                     <a class="closebtn" ng-click="closeNav()">&times;</a>
                     <a href="#">Home</a>
-                    <a href="#!/upload/">Upload</a>
+                    <a  href="#!/upload/">Upload</a>
                     <a href="https://github.com/BurnMyTPU/">Code</a>
                     <a href="#">About</a>
                   </div>
@@ -39,27 +39,37 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-xs-4"></div>
-      <div class="col-xs-4">
+      
+      <div class="col-xs-12" style="z-index:0;position: relative;">
+        <!-- <form>
+          <input id="input-b1" name="image" type="file" class="form-control file" accept="image/*" data-browse-on-zone-click="true">
+        </form> -->
           <form   layout-align="center center" id="uploadform">
-            <p align="center">
+
+           <!--  <p align="center">
             <div class="uploader__input-box">
             <input ng-model="form.image" type="file" name="image" class="form-control uploader__input" accept="image/*"  onchange="angular.element(this).scope().uploadedFile(this)" style="width:200px"/>
             </div>
             <img ng-src="{{image_source}}" style="width:200px;" align="center">
             <input type="submit" id="submit" value="Upload" ng-click="UploadImg()"/>
-          
+            <input id="file-0d" class="file" type="file" accept="image/*" data-theme="fas">
         </p>
-        <br/>
+ -->
+        <!-- <input id="input-b1" name="input-b1" type="file" class="file" accept="image/*" data-browse-on-zone-click="true"> -->
+        <div class="file-loading" >
+                <input id="file-0d" class="file" type="file" accept="image/*" data-theme="fas" ngf-select="onFileSelect($files)"">
+        </div>
       </form>
+      <!-- <form enctype="multipart/form-data">
+        
+    </form> -->
     </div> 
     </div>
-    <div class="row">
-      <div class="col-xs-1"></div>
-      <div class="col-xs-10">
-        <!-- <img ng-src="{{image_source}}"  align="center"> -->
+    <!-- <div class="row">
+      <div class="col-xs-12">
+        <input id="input-b1" name="input-b1" type="file" class="file" accept="image/*" data-browse-on-zone-click="true">
       </div>
-    </div>
+    </div> -->
     
   </div>
 </body>
