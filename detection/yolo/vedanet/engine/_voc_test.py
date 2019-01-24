@@ -101,4 +101,5 @@ def VOCTest(hyper_params):
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
     print('reorg_dets')
     print(reorg_dets)
+    return 
     voc_wrapper.genResults(reorg_dets, results, nms_thresh)
