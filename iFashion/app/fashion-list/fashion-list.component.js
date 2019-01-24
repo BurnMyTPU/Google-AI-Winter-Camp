@@ -5,13 +5,13 @@ angular.
   module('fashionList').
   component('fashionList', {
     templateUrl: 'fashion-list/fashion-list.template.html',
-    controller: function FashionListController($scope, $http, svc,$timeout) {
+    controller: function FashionListController($scope, $http, svc, $window, $timeout) {
       var self = this;
       var testJson;
-      $http.get('fashions/fashion.json').then(function(response) {
-        testJson = response.data;
-        self.fashions= response.data;
-      });
+      // $http.get('fashions/fashion.json').then(function(response) {
+      //   testJson = response.data;
+      //   self.fashions= response.data;
+      // });
 
     $scope.form = [];
     $scope.files = [];
@@ -21,22 +21,16 @@ angular.
     $timeout(function() { $scope.$apply(); },10);
 
     $scope.$watch(svc.getMessage,function(v){
+
       console.log("v");
       console.log(v);
       console.log(svc.getMessage());
-      // alert(v);
       self.fashions= v;
       
-        $scope.$apply();
-      
-
+      // $scope.$apply();
+      // $window.location.reload();
       
     });
-
-    
-
-
-  
 
     // $scope.$watch('fashions',function(){
     //   $scope.$apply();
@@ -57,9 +51,9 @@ angular.
 
     reader.onload = function(event) {
       $scope.image_source = event.target.result
-      $scope.$apply(function($scope) {
-        $scope.files = element.files;
-      });
+      // $scope.$apply(function($scope) {
+      //   $scope.files = element.files;
+      // });
     }
     reader.readAsDataURL(element.files[0]);
   };
