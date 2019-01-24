@@ -76,7 +76,7 @@ def VOCTest_Single(hyper_params, img_path):
         output, loss = net(data, '')
 
     det = dict()
-    det['img_path'] = output[0]
+    det[img_path] = output[0]
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
     ret = voc_wrapper.genResults_Single(reorg_dets, results, nms_thresh)
