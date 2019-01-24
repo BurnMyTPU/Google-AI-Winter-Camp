@@ -10,17 +10,17 @@ def genResults_Single(reorg_dets, results_folder, nms_thresh=0.45):
         ret = []
         # dst_fp = '%s/comp4_det_test_%s.txt' % (results_folder, label)
         for name in pieces.keys():
-            print('name:{}'.format(name))
+            # print('name:{}'.format(name))
             pred = np.array(pieces[name], dtype=np.float32)
             keep = nms(pred, nms_thresh, force_cpu=True)
             # keep = soft_nms(pred, sigma=0.5, Nt=0.3, method=1)
             # print k, len(keep), len(pred_dets[k])
             for ik in keep:
-                # print k, pred_left[ik][-1], ' '.join([str(int(num)) for num in pred_left[ik][:4]])
-                line = '%s %f %s' % (name, pred[ik][-1], ' '.join([str(num) for num in pred[ik][:4]]))
-                print('line,', line)
-                ret.append(line)
-
+                if float(pred[ik][-1]) > 0.7:
+                    # print k, pred_left[ik][-1], ' '.join([str(int(num)) for num in pred_left[ik][:4]])
+                    line = '%s %f %s' % (name, pred[ik][-1], ' '.join([str(num) for num in pred[ik][:4]]))
+                    # print('line,', line)
+                    ret.append(line)
         return ret
 
 
