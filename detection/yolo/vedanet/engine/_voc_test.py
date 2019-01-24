@@ -3,7 +3,7 @@ import torch
 from torchvision import transforms as tf
 from statistics import mean
 import os
-
+from PIL import Image
 from .. import data as vn_data
 from .. import models
 from . import engine
@@ -61,16 +61,11 @@ def VOCTest_Single(hyper_params, img_path):
     if use_cuda:
         net.cuda()
 
-    log.debug('Creating dataset')
-    loader = torch.utils.data.DataLoader(
-        CustomDataset(hyper_params),
-        batch_size=batch,
-        shuffle=False,
-        drop_last=False,
-        num_workers=nworkers if use_cuda else 0,
-        pin_memory=pin_mem if use_cuda else False,
-        collate_fn=vn_data.list_collate,
-    )
+    data = Image.open(img_path).convert('rgb')
+    lb = vn_data.transform.Letterbox(network_size)
+    it = tf.ToTensor()
+    img_tf = vn_data.transform.Compose([lb, it])
+    data = img_tf(data)
 
     log.debug('Running network')
 
@@ -79,7 +74,7 @@ def VOCTest_Single(hyper_params, img_path):
     if use_cuda:
         data = data.cuda()
     with torch.no_grad():
-        output, loss = net(data, box)
+        output, loss = net(data, '')
     det['img_path'] = output[0]
 
     netw, neth = network_size
