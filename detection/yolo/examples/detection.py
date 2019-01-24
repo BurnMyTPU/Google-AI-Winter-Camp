@@ -37,7 +37,7 @@ if __name__ == '__main__':
     hyper_params = vn.hyperparams.HyperParams(config, train_flag=train_flag)
     fw = open('./val_result.txt', 'w')
     imgs = os.listdir(image_dir)
-    for img in image_dir:
+    for img in imgs:
         img_path = os.path.join(image_dir, img)
         # # init and run eng
         ret = vn.engine.VOCTest_Single(hyper_params, img_path)
