@@ -60,7 +60,7 @@ def VOCTest_Single(hyper_params, img_path):
     # pdb.set_trace()
     if use_cuda:
         net.cuda()
-
+    print('img_path {}'.format(img_path))
     data = Image.open(img_path)
     lb = vn_data.transform.Letterbox(network_size)
     it = tf.ToTensor()
@@ -75,8 +75,8 @@ def VOCTest_Single(hyper_params, img_path):
         data = data.cuda()
     with torch.no_grad():
         output, loss = net(data, '')
-    det['img_path'] = output[0]
 
+    det['img_path'] = output[0]
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
     ret = voc_wrapper.genResults_Single(reorg_dets, results, nms_thresh)
