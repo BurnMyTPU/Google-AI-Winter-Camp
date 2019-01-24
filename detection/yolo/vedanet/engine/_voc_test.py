@@ -109,7 +109,7 @@ def VOCTest(hyper_params):
     if use_cuda:
         net.cuda()
 
-    log.debug('Creating dataset')
+    print('Creating dataset')
     loader = torch.utils.data.DataLoader(
         CustomDataset(hyper_params),
         batch_size=batch,
@@ -119,8 +119,7 @@ def VOCTest(hyper_params):
         pin_memory=pin_mem if use_cuda else False,
         collate_fn=vn_data.list_collate,
     )
-
-    log.debug('Running network')
+    print('Running network')
     tot_loss = []
     coord_loss = []
     conf_loss = []
