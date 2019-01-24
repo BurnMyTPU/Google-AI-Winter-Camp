@@ -6,10 +6,11 @@ from .fast_rcnn.nms_wrapper import nms, soft_nms
 
 def genResults_Single(reorg_dets, results_folder, nms_thresh=0.45):
     for label, pieces in reorg_dets.items():
-        print(label)
+
         ret = []
         # dst_fp = '%s/comp4_det_test_%s.txt' % (results_folder, label)
         for name in pieces.keys():
+            print('name:{}'.format(name))
             pred = np.array(pieces[name], dtype=np.float32)
             keep = nms(pred, nms_thresh, force_cpu=True)
             # keep = soft_nms(pred, sigma=0.5, Nt=0.3, method=1)
@@ -28,6 +29,7 @@ def genResults(reorg_dets, results_folder, nms_thresh=0.45):
         ret = []
         dst_fp = '%s/comp4_det_test_%s.txt' % (results_folder, label)
         for name in pieces.keys():
+            print('name:{}'.format(name))
             pred = np.array(pieces[name], dtype=np.float32)
             keep = nms(pred, nms_thresh, force_cpu=True)
             # keep = soft_nms(pred, sigma=0.5, Nt=0.3, method=1)
