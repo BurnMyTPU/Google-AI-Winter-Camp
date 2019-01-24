@@ -74,16 +74,14 @@ def VOCTest_Single(hyper_params, img_path):
 
     log.debug('Running network')
 
-    anno, det = {}, {}
-
+    det = {}
 
     if use_cuda:
         data = data.cuda()
     with torch.no_grad():
         output, loss = net(data, box)
 
-    key_val = len(anno)
-    # anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
+    key_val = len(det)
     det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
 
     netw, neth = network_size
@@ -137,7 +135,7 @@ def VOCTest(hyper_params):
     num_det = 0
 
     for idx, (data, box) in enumerate(loader):
-        print('bbox',box)
+        print('bbox', box)
 
         if (idx + 1) % 20 == 0:
             log.info('%d/%d' % (idx + 1, len(loader)))
@@ -145,11 +143,11 @@ def VOCTest(hyper_params):
             data = data.cuda()
         with torch.no_grad():
             output, loss = net(data, box)
-        return
-        key_val = len(anno)
+        key_val = len(det)
         anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
         det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
-
+        break
+    print(det)
     netw, neth = network_size
-    reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
+    reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)
     voc_wrapper.genResults(reorg_dets, results, nms_thresh)
