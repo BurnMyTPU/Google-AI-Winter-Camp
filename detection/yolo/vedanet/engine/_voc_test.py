@@ -84,7 +84,8 @@ def VOCTest_Single(hyper_params, img_path):
 
 
 def VOCTest(hyper_params):
-    log.debug('Creating network')
+    print('Creating network')
+    # log.debug('Creating network')
 
     model_name = hyper_params.model_name
     batch = hyper_params.batch
