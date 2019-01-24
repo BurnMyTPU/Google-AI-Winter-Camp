@@ -16,6 +16,7 @@ def genResults_Single(reorg_dets, results_folder, nms_thresh=0.45):
             for ik in keep:
                 # print k, pred_left[ik][-1], ' '.join([str(int(num)) for num in pred_left[ik][:4]])
                 line = '%s %f %s' % (name, pred[ik][-1], ' '.join([str(num) for num in pred[ik][:4]]))
+                print('line,', line)
                 ret.append(line)
 
         return ret
@@ -33,6 +34,7 @@ def genResults(reorg_dets, results_folder, nms_thresh=0.45):
             for ik in keep:
                 # print k, pred_left[ik][-1], ' '.join([str(int(num)) for num in pred_left[ik][:4]])
                 line = '%s %f %s' % (name, pred[ik][-1], ' '.join([str(num) for num in pred[ik][:4]]))
+                print('line,', line)
                 ret.append(line)
 
         with open(dst_fp, 'w') as fd:
