@@ -55,27 +55,26 @@ def VOCTest_Single(hyper_params, img_path):
     test_args = {'conf_thresh': conf_thresh, 'network_size': network_size, 'labels': labels}
     net = models.__dict__[model_name](hyper_params.classes, weights, train_flag=2, test_args=test_args)
     net.eval()
-    log.info('Net structure\n%s' % net)
+    # log.info('Net structure\n%s' % net)
     # import pdb
     # pdb.set_trace()
     if use_cuda:
         net.cuda()
-    print('img_path {}'.format(img_path))
+    print('Reading Data')
     data = Image.open(img_path)
+
     lb = vn_data.transform.Letterbox(network_size)
     it = tf.ToTensor()
     img_tf = vn_data.transform.Compose([lb, it])
     data = img_tf(data)
-
-    log.debug('Running network')
-
-    det = {}
-
+    print('shape {}'.format(data.shape))
+    print('Running network')
     if use_cuda:
         data = data.cuda()
     with torch.no_grad():
         output, loss = net(data, '')
 
+    det = dict()
     det['img_path'] = output[0]
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
@@ -127,11 +126,11 @@ def VOCTest(hyper_params):
     anno, det = {}, {}
     num_det = 0
     for idx, (data, box) in enumerate(loader):
-        print('idx {}'.format(idx))
         if (idx + 1) % 20 == 0:
             log.info('%d/%d' % (idx + 1, len(loader)))
         if use_cuda:
             data = data.cuda()
+        print('shape {}'.format(data.shape))
         with torch.no_grad():
             # output, loss = net(data, box)
             output, loss = net(data, '')
