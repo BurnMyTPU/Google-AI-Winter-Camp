@@ -9,7 +9,7 @@ from .. import models
 from . import engine
 from utils.test import voc_wrapper
 
-__all__ = ['VOCTest']
+__all__ = ['VOCTest', 'VOCTest_Single']
 
 
 class CustomDataset(vn_data.BramboxDataset):
@@ -36,8 +36,60 @@ class CustomDataset(vn_data.BramboxDataset):
         return img, anno
 
 
-def test():
-    pass
+def VOCTest_Single(hyper_params, img_path):
+    log.debug('Creating network')
+
+    model_name = hyper_params.model_name
+    batch = hyper_params.batch
+    use_cuda = hyper_params.cuda
+    weights = hyper_params.weights
+    conf_thresh = hyper_params.conf_thresh
+    network_size = hyper_params.network_size
+    labels = hyper_params.labels
+    nworkers = hyper_params.nworkers
+    pin_mem = hyper_params.pin_mem
+    nms_thresh = hyper_params.nms_thresh
+    # prefix = hyper_params.prefix
+    results = hyper_params.results
+
+    test_args = {'conf_thresh': conf_thresh, 'network_size': network_size, 'labels': labels}
+    net = models.__dict__[model_name](hyper_params.classes, weights, train_flag=2, test_args=test_args)
+    net.eval()
+    log.info('Net structure\n%s' % net)
+    # import pdb
+    # pdb.set_trace()
+    if use_cuda:
+        net.cuda()
+
+    log.debug('Creating dataset')
+    loader = torch.utils.data.DataLoader(
+        CustomDataset(hyper_params),
+        batch_size=batch,
+        shuffle=False,
+        drop_last=False,
+        num_workers=nworkers if use_cuda else 0,
+        pin_memory=pin_mem if use_cuda else False,
+        collate_fn=vn_data.list_collate,
+    )
+
+    log.debug('Running network')
+
+    anno, det = {}, {}
+
+
+    if use_cuda:
+        data = data.cuda()
+    with torch.no_grad():
+        output, loss = net(data, box)
+
+    key_val = len(anno)
+    # anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
+    det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
+
+    netw, neth = network_size
+    reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
+    ret = voc_wrapper.genResults_Single(reorg_dets, results, nms_thresh)
+    print(ret)
 
 
 def VOCTest(hyper_params):
@@ -85,13 +137,15 @@ def VOCTest(hyper_params):
     num_det = 0
 
     for idx, (data, box) in enumerate(loader):
+        print('bbox',box)
+
         if (idx + 1) % 20 == 0:
             log.info('%d/%d' % (idx + 1, len(loader)))
         if use_cuda:
             data = data.cuda()
         with torch.no_grad():
             output, loss = net(data, box)
-
+        return
         key_val = len(anno)
         anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
         det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})

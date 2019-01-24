@@ -4,6 +4,23 @@ from PIL import Image
 from .fast_rcnn.nms_wrapper import nms, soft_nms
 
 
+def genResults_Single(reorg_dets, results_folder, nms_thresh=0.45):
+    for label, pieces in reorg_dets.items():
+        ret = []
+        # dst_fp = '%s/comp4_det_test_%s.txt' % (results_folder, label)
+        for name in pieces.keys():
+            pred = np.array(pieces[name], dtype=np.float32)
+            keep = nms(pred, nms_thresh, force_cpu=True)
+            # keep = soft_nms(pred, sigma=0.5, Nt=0.3, method=1)
+            # print k, len(keep), len(pred_dets[k])
+            for ik in keep:
+                # print k, pred_left[ik][-1], ' '.join([str(int(num)) for num in pred_left[ik][:4]])
+                line = '%s %f %s' % (name, pred[ik][-1], ' '.join([str(num) for num in pred[ik][:4]]))
+                ret.append(line)
+
+        return ret
+
+
 def genResults(reorg_dets, results_folder, nms_thresh=0.45):
     for label, pieces in reorg_dets.items():
         ret = []
