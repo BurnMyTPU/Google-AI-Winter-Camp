@@ -67,6 +67,7 @@ def VOCTest_Single(hyper_params, img_path):
     it = tf.ToTensor()
     img_tf = vn_data.transform.Compose([lb, it])
     data = img_tf(data)
+    data = torch.unsqueeze(data,0)
     print('shape {}'.format(data.shape))
     print('Running network')
     if use_cuda:
