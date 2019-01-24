@@ -25,10 +25,11 @@ if __name__ == '__main__':
     train_flag = 2  # Test
     config = initEnv(train_flag=train_flag, model_name=model_name)  # args.model_name)
 
-    # log.info('Config\n\n%s\n' % pformat(config))
+    log.info('Config\n\n%s\n' % pformat(config))
 
     # init env
-    # hyper_params = vn.hyperparams.HyperParams(config, train_flag=train_flag)
+    hyper_params = vn.hyperparams.HyperParams(config, train_flag=train_flag)
+    print(hyper_params)
     #
     # # init and run eng
     # vn.engine.VOCTest(hyper_params)
