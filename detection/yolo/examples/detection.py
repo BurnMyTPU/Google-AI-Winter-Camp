@@ -38,7 +38,7 @@ if __name__ == '__main__':
     fw = open('./val_result.txt', 'w')
     imgs = os.listdir(image_dir)
     for img in image_dir:
-        img_path = os.pardir.join(image_dir, img)
+        img_path = os.path.join(image_dir, img)
         # # init and run eng
         ret = vn.engine.VOCTest_Single(hyper_params, img_path)
         fw.write(img + ' ' + str(ret) + '\n')
