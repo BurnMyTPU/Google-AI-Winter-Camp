@@ -18,7 +18,7 @@ from utils.envs import initEnv
 
 
 class Detection:
-
+    pass
 
 
 if __name__ == '__main__':
