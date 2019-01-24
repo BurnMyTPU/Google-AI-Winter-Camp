@@ -60,9 +60,9 @@ if __name__ == '__main__':
     print('Getting testing annotation filenames')
     test = []
     for (year, img_set) in TESTSET:
-        with open(f'{ROOT}/fashion{year}/test.txt', 'r') as f:
+        with open(f'{ROOT}/i_fashion{year}/test.txt', 'r') as f:
             ids = f.read().strip().split()
-        test += [f'{ROOT}/fashion{year}/Annotations/{xml_id}.xml' for xml_id in ids]
+        test += [f'{ROOT}/i_fashion{year}/Annotations/{xml_id}.xml' for xml_id in ids]
 
     if DEBUG:
         print(f'\t{len(test)} xml files')
