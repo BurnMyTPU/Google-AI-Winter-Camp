@@ -80,9 +80,7 @@ def VOCTest_Single(hyper_params, img_path):
         data = data.cuda()
     with torch.no_grad():
         output, loss = net(data, box)
-
-    key_val = len(det)
-    det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
+    det['img_path'] = output[0]
 
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)  # , prefix)
@@ -133,26 +131,17 @@ def VOCTest(hyper_params):
     cls_loss = []
     anno, det = {}, {}
     num_det = 0
-    det2 = {}
     for idx, (data, box) in enumerate(loader):
-        # print('bbox', box)
-
         if (idx + 1) % 20 == 0:
             log.info('%d/%d' % (idx + 1, len(loader)))
         if use_cuda:
             data = data.cuda()
         with torch.no_grad():
-            output, loss = net(data, box)
-        print('output\n', output)
+            # output, loss = net(data, box)
+            output, loss = net(data, '')
         key_val = len(det)
         anno.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(box)})
-        det2['img_path'] = output[0]
         det.update({loader.dataset.keys[key_val + k]: v for k, v in enumerate(output)})
-        break
-    print('\ndet1\n')
-    print(det)
-    print('\ndet2\n')
-    print(det2)
 
     netw, neth = network_size
     reorg_dets = voc_wrapper.reorgDetection(det, netw, neth)
