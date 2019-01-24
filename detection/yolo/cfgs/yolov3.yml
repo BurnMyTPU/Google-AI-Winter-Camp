@@ -37,11 +37,11 @@ test:
   dataset: "test"
   stdout: True
   gpus: "0"
-  nworkers: 8
+  nworkers: 1 #8
   pin_mem: True
 
   input_shape: [544, 544]
-  batch_size: 1
+  batch_size: 1 #8
   weights: "weights/weights_10000.pt"
 
   conf_thresh: 0.005
