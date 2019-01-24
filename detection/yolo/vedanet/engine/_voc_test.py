@@ -61,7 +61,7 @@ def VOCTest_Single(hyper_params, img_path):
     if use_cuda:
         net.cuda()
 
-    data = Image.open(img_path).convert('rgb')
+    data = Image.open(img_path)
     lb = vn_data.transform.Letterbox(network_size)
     it = tf.ToTensor()
     img_tf = vn_data.transform.Compose([lb, it])
