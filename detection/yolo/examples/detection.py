@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # parser.add_argument('model_name', help='model name', default='yolov3')
     # parser.add_argument('img', help='image path', default=None)
     # args = parser.parse_args()
-    model_name = 'yolov3'
+    model_name = 'Yolov3'
     train_flag = 2  # Test
     config = initEnv(train_flag=train_flag, model_name=model_name)  # args.model_name)
 
