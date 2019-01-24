@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     # init env
     hyper_params = vn.hyperparams.HyperParams(config, train_flag=train_flag)
-    print(hyper_params)
+    # print(hyper_params)
     #
     # # init and run eng
     # vn.engine.VOCTest_Single(hyper_params)
