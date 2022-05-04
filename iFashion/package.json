@@ -6,7 +6,7 @@
   "repository": "https://github.com/angular/angular-phonecat",
   "license": "MIT",
   "dependencies": {
-    "angular": "1.7.x",
+    "angular": "1.8.x",
     "angular-route": "1.7.x",
     "bootstrap": "3.3.x",
     "image-to-blob": "^0.2.0"
