@@ -8,7 +8,7 @@
   "dependencies": {
     "angular": "1.7.x",
     "angular-route": "1.7.x",
-    "bootstrap": "3.3.x",
+    "bootstrap": "3.4.x",
     "image-to-blob": "^0.2.0"
   },
   "devDependencies": {
